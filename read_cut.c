@@ -19,10 +19,11 @@ char *read_line(void)
 	}
 	while (1)
 	{
-		if((c = getchar()) == '\n' || c == EOF)
+		c = getchar();
+		if (c == '\n' || c == EOF)
 		{
 			line[len] = '\0';
-			return line;
+			return (line);
 		}
 		else
 		{
@@ -43,7 +44,7 @@ char *read_line(void)
 
 /**
  * cut_line - cut line into strings
- * 
+ *
  * @line: to cut
  *
  * Return: array of strings.
@@ -55,7 +56,7 @@ char **cut_line(char *line)
 	int Buffer = BUFSIZE, i = 0;
 
 	tokens = malloc(Buffer * sizeof(char *));
-	if(!tokens)
+	if (!tokens)
 	{
 		perror("problem in allocation");
 		exit(EXIT_FAILURE);
@@ -77,5 +78,5 @@ char **cut_line(char *line)
 		token = strtok(NULL, " ");
 	}
 	tokens[i] = NULL;
-	return tokens;
+	return (tokens);
 }

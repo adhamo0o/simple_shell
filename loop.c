@@ -12,8 +12,7 @@ void shell_loop(void)
 	char **words;
 	int status;
 
-	do
-	{
+	do {
 		printf("($) ");
 		line = read_line();
 		words = cut_line(line);
@@ -21,6 +20,5 @@ void shell_loop(void)
 
 		free(line);
 		free(words);
-	}
-	while (status);
+	} while (status);
 }
