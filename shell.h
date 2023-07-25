@@ -20,10 +20,10 @@
 #include <stdbool.h>
 
 
-void shell_loop(void);
-char *read_line(void);
-char **cut_line(char *line);
-int execute_line(char **word);
-int execute(char **args);
+void shell_loop(char *str);
+char *read_line(char *str);
+char **cut_line(char *line, char *str);
+int execute_line(char **word, char *str, int n);
+char *get_executable_path(const char *executable_name);
 
 #endif

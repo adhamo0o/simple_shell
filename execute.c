@@ -45,7 +45,7 @@ char *get_executable_path(const char *executable_name)
  * @args: to execute
  * Return: 1 on sucess and 0 if not
  */
-int execute_line(char **args)
+int execute_line(char **args, char *str, int n)
 {
 	int status, i = 0;
 	pid_t pid;
@@ -62,10 +62,10 @@ int execute_line(char **args)
 	if (pid == 0)
 	{
 		executable = get_executable_path(args[0]);
-		if (executable == NULL)
+		if (!executable)
 		{
-			perror("Executable not found");
-			return (1);
+			fprintf(stdout, "%s: %i: %s: not found\n", str, n, args[0]);
+			return (2);
 		}
 		if (execve(executable, args, env) == -1)
 			perror("something wrong");

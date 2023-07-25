@@ -5,7 +5,7 @@
  *
  * Return: pointer to the line.
 */
-char *read_line(void)
+char *read_line(char *str)
 {
 	char *line;
 	int len = 0, Buffer = BUFSIZE;
@@ -14,7 +14,7 @@ char *read_line(void)
 	line = malloc(Buffer);
 	if (!line)
 	{
-		perror("problem in allocation");
+		perror(str);
 		exit(EXIT_FAILURE);
 	}
 	while (1)
@@ -35,7 +35,7 @@ char *read_line(void)
 			line = realloc(line, Buffer);
 			if (!line)
 			{
-				perror("problem in ");
+				perror(str);
 				exit(EXIT_FAILURE);
 			}
 		}
@@ -49,7 +49,7 @@ char *read_line(void)
  *
  * Return: array of strings.
 */
-char **cut_line(char *line)
+char **cut_line(char *line, char *str)
 {
 	char **tokens;
 	char *token;
@@ -58,7 +58,7 @@ char **cut_line(char *line)
 	tokens = malloc(Buffer * sizeof(char *));
 	if (!tokens)
 	{
-		perror("problem in allocation");
+		perror(str);
 		exit(EXIT_FAILURE);
 	}
 	token = strtok(line, " ");
@@ -71,7 +71,7 @@ char **cut_line(char *line)
 				tokens = realloc(tokens, Buffer * sizeof(char *));
 				if (!tokens)
 				{
-					perror("problem in allocation");
+					perror(str);
 					exit(EXIT_FAILURE);
 				}
 			}

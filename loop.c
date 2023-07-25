@@ -6,17 +6,20 @@
  * Return: Nothing.
 */
 
-void shell_loop(void)
+void shell_loop(char *str)
 {
 	char *line;
 	char **words;
 	int status;
+	int n = 1;
 
 	do {
 		printf("($) ");
-		line = read_line();
-		words = cut_line(line);
-		status = execute_line(words);
+		line = read_line(str);
+		words = cut_line(line, str);
+		status = execute_line(words, str, n);
+		if (status == 2)
+			n++;
 
 		free(line);
 		free(words);

@@ -5,8 +5,8 @@
  *
  * Return: 0.
  */
-int main(void)
+int main(int __attribute__((unused)) argc, char *argv[])
 {
-	shell_loop();
+	shell_loop(argv[0]);
 	return (0);
 }
