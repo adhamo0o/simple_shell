@@ -3,6 +3,9 @@
 /**
  * main - main function of the shell
  *
+ * @argc: ...
+ * @argv: ...
+ *
  * Return: 0.
  */
 int main(int __attribute__((unused)) argc, char *argv[])

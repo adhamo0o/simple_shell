@@ -3,6 +3,8 @@
 /**
  * shell_loop - main loop of the shell
  *
+ * @str: string.
+ *
  * Return: Nothing.
 */
 

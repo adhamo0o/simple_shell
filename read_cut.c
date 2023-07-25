@@ -2,6 +2,7 @@
 #define BUFSIZE 128
 /**
  * read_line - read line from the shell
+ * @str: string
  *
  * Return: pointer to the line.
 */
@@ -46,6 +47,7 @@ char *read_line(char *str)
  * cut_line - cut line into strings
  *
  * @line: to cut
+ * @str: string
  *
  * Return: array of strings.
 */
@@ -67,16 +69,16 @@ char **cut_line(char *line, char *str)
 	while (token)
 	{
 		tokens[i++] = token;
-		if (i >= Buffer)
+		if (i == Buffer)
+		{
+			Buffer += BUFSIZE;
+			tokens = realloc(tokens, Buffer * sizeof(char *));
+			if (!tokens)
 			{
-				Buffer += BUFSIZE;
-				tokens = realloc(tokens, Buffer * sizeof(char *));
-				if (!tokens)
-				{
-					perror(str);
-					exit(EXIT_FAILURE);
-				}
+				perror(str);
+				exit(EXIT_FAILURE);
 			}
+		}
 		token = strtok(NULL, " ");
 	}
 	tokens[i] = NULL;

@@ -43,6 +43,8 @@ char *get_executable_path(const char *executable_name)
 /**
  * execute_line - function that execute the files
  * @args: to execute
+ * @str: string
+ * @n: int
  * Return: 1 on sucess and 0 if not
  */
 int execute_line(char **args, char *str, int n)
