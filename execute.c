@@ -5,11 +5,11 @@
  * @executable_name: the name
  * Return: the path
  */
-char* get_executable_path(const char* executable_name)
+char *get_executable_path(const char *executable_name)
 {
 	char command[256];
-	FILE* fp;
-	char* path = NULL;
+	FILE *fp;
+	char *path = NULL;
 
 	sprintf(command, "which %s", executable_name);
 	fp = popen(command, "r");
@@ -19,7 +19,7 @@ char* get_executable_path(const char* executable_name)
 		perror("popen");
 		return (NULL);
 	}
-	path = (char*)malloc(256 * sizeof(char));
+	path = (char *)malloc(256 * sizeof(char));
 	if (path == NULL)
 	{
 		perror("malloc");
@@ -53,13 +53,13 @@ int execute_line(char **args)
 	char *env[] = {NULL};
 	char *executable;
 
-	for(i = 0; i < 2; i+)
+	for (i = 0; i < 2; i++)
 	{
 		if (strcmp(args[0], sys[i]) == 0)
 			return (0);
 	}
-
-	if(pid == 0)
+	pid = fork();
+	if (pid == 0)
 	{
 		executable = get_executable_path(args[0]);
 		if (executable == NULL)
