@@ -62,6 +62,8 @@ char **cut_line(char *line, char *str)
 		exit(EXIT_FAILURE);
 	}
 	token = strtok(line, " ");
+	if (!token)
+		return (NULL);
 	while (token)
 	{
 		tokens[i++] = token;

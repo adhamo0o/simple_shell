@@ -53,6 +53,8 @@ int execute_line(char **args, char *str, int n)
 	char *env[] = {NULL};
 	char *executable;
 
+	if (!args)
+		return (1);
 	for (i = 0; i < 2; i++)
 	{
 		if (strcmp(args[0], sys[i]) == 0)
