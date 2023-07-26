@@ -13,10 +13,12 @@ void shell_loop(char *str)
 	char *line;
 	char **words;
 	int status;
-	int n = 1;
+	int n = 1, i;
 
 	do {
-		printf("($) ");
+		i = isatty(STDIN_FILENO);
+		if (i)
+			printf("($) ");
 		line = read_line(str);
 		words = cut_line(line, str);
 		status = execute_line(words, str, n);
