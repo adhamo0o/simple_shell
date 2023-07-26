@@ -36,6 +36,7 @@ char *read_line(char *str)
 			line = realloc(line, Buffer);
 			if (!line)
 			{
+				free(line);
 				perror(str);
 				exit(EXIT_FAILURE);
 			}
@@ -75,6 +76,7 @@ char **cut_line(char *line, char *str)
 			tokens = realloc(tokens, Buffer * sizeof(char *));
 			if (!tokens)
 			{
+				free(tokens);
 				perror(str);
 				exit(EXIT_FAILURE);
 			}
