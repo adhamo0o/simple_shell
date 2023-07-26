@@ -58,15 +58,15 @@ char **cut_line(char *line, char *str)
 	char *token;
 	int Buffer = BUFSIZE, i = 0;
 
+	token = strtok(line, " ");
+	if (!token)
+		return (NULL);
 	tokens = malloc(Buffer * sizeof(char *));
 	if (!tokens)
 	{
 		perror(str);
 		exit(EXIT_FAILURE);
 	}
-	token = strtok(line, " ");
-	if (!token)
-		return (NULL);
 	while (token)
 	{
 		tokens[i++] = token;
