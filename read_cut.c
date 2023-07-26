@@ -16,7 +16,7 @@ char *read_line(char *str)
 	if (!line)
 	{
 		perror(str);
-		exit(EXIT_FAILURE);
+		return (NULL);
 	}
 	while (1)
 	{
@@ -38,7 +38,7 @@ char *read_line(char *str)
 			{
 				free(line);
 				perror(str);
-				exit(EXIT_FAILURE);
+				return (NULL);
 			}
 		}
 	}
@@ -65,7 +65,7 @@ char **cut_line(char *line, char *str)
 	if (!tokens)
 	{
 		perror(str);
-		exit(EXIT_FAILURE);
+		return (NULL);
 	}
 	while (token)
 	{
@@ -78,7 +78,7 @@ char **cut_line(char *line, char *str)
 			{
 				free(tokens);
 				perror(str);
-				exit(EXIT_FAILURE);
+				return (NULL);
 			}
 		}
 		token = strtok(NULL, " ");
