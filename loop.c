@@ -24,6 +24,8 @@ void shell_loop(char *str)
 		status = execute_line(words, str, n);
 		if (status == 2)
 			n++;
+		else if (status == 0)
+			exit(EXIT_SUCCESS);
 
 		free(line);
 		free(words);

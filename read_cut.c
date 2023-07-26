@@ -58,9 +58,9 @@ char **cut_line(char *line, char *str)
 	char *token;
 	int Buffer = BUFSIZE, i = 0;
 
-	token = strtok(line, " ");
-	if (!token)
+	if (!line)
 		return (NULL);
+	token = strtok(line, " ");
 	tokens = malloc(Buffer * sizeof(char *));
 	if (!tokens)
 	{
