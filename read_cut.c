@@ -12,14 +12,39 @@ char *read_line(void)
 	size_t Buffer = 0
 	char c;
 
+<<<<<<< HEAD
 	if (getline(&line, &Buffer, stdin) == -1)
+=======
+	line = malloc(Buffer);
+	if (!line)
+	{
+		perror(str);
+		return (NULL);
+	}
+	while (1)
+>>>>>>> d08c21c657a8adb3975cd7c59cefa53e67d358a9
 	{
 		if (feof(stdin))
 			exit(EXIT_SUCCESS);
 		else
 		{
+<<<<<<< HEAD
 			perror("failure to read line");
 			exit(EXIT_FAILURE);
+=======
+			line[len++] = c;
+		}
+		if (len >= Buffer)
+		{
+			Buffer += BUFSIZE;
+			line = realloc(line, Buffer);
+			if (!line)
+			{
+				free(line);
+				perror(str);
+				return (NULL);
+			}
+>>>>>>> d08c21c657a8adb3975cd7c59cefa53e67d358a9
 		}
 	}
 	return (line);
@@ -44,8 +69,13 @@ char **cut_line(char *line)
 	tokens = malloc(Buffer * sizeof(char *));
 	if (!tokens)
 	{
+<<<<<<< HEAD
 		fprintf(stderr, "allocation failure\n");
 		exit(EXIT_FAILURE);
+=======
+		perror(str);
+		return (NULL);
+>>>>>>> d08c21c657a8adb3975cd7c59cefa53e67d358a9
 	}
 	while (token)
 	{
@@ -56,8 +86,14 @@ char **cut_line(char *line)
 			tokens = realloc(tokens, Buffer * sizeof(char *));
 			if (!tokens)
 			{
+<<<<<<< HEAD
 				fprintf(stderr, "alloctaion failure\n");
 				exit(EXIT_FAILURE);
+=======
+				free(tokens);
+				perror(str);
+				return (NULL);
+>>>>>>> d08c21c657a8adb3975cd7c59cefa53e67d358a9
 			}
 		}
 		token = strtok(NULL, delimeter);
