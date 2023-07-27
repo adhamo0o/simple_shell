@@ -3,7 +3,7 @@
 
 
 #define buf_size 64
-#define delim " \t\r\n\a"
+#define delimmeter " \t\r\n\a"
 
 
 #include <stdio.h>
@@ -21,8 +21,8 @@
 
 
 void shell_loop(char *str);
-char *read_line(char *str);
-char **cut_line(char *line, char *str);
+char *read_line(void);
+char **cut_line(char *line);
 int execute_line(char **word, char *str, int n);
 char *get_executable_path(const char *executable_name);
 
