@@ -1,87 +1,132 @@
 #include "shell.h"
 
 /**
- * get_executable_path - function that return the path
- * @executable_name: the name
- * Return: the path
+ * num_builtins - Get the number of built-in commands
+ *
+ * Return: The number of built-in commands
  */
-char *get_executable_path(const char *executable_name)
+int num_builtins(void)
 {
-	char command[256];
-	FILE *fp;
-	char *path = NULL;
+	char *builtin_str[] = {
+	"cd",
+	"exit",
+	"env"
+	};
 
-	sprintf(command, "which %s", executable_name);
-	fp = popen(command, "r");
-
-	if (fp == NULL)
-	{
-		perror("popen");
-		return (NULL);
-	}
-	path = (char *)malloc(256 * sizeof(char));
-	if (path == NULL)
-	{
-		perror("malloc");
-		pclose(fp);
-		return (NULL);
-	}
-	if (fgets(path, 256, fp) != NULL)
-	{
-		path[strcspn(path, "\n")] = '\0';
-	}
-	else
-	{
-		free(path);
-		path = NULL;
-	}
-
-	pclose(fp);
-	return (path);
+	return (sizeof(builtin_str) / sizeof(char *));
 }
 
 /**
- * execute_line - function that execute the files
- * @args: to execute
- * @str: string
- * @n: int
- * Return: 1 on sucess and 0 if not
+ * cd_fun - Changeworking directory
+ * @args: The arguments
+ *
+ * Return: Always returns 1
  */
-int execute_line(char **args, char *str, int n)
+int cd_fun(char **args)
 {
-	int status, i = 0;
-	pid_t pid;
-	char *sys[] = {"exit", "cd"};
-	char *env[] = {NULL};
-	char *executable;
+	char *home;
+	char *old;
+	char current[PATH_MAX];
 
-	if (!args)
-		return (1);
-	for (i = 0; i < 2; i++)
+	if (args[1] == NULL || strcmp(args[1], "~") == 0)
 	{
-		if (strcmp(args[0], sys[i]) == 0)
-			return (0);
-	}
-	pid = fork();
-	if (pid == 0)
-	{
-		executable = get_executable_path(args[0]);
-		if (!executable)
+		home = getenv("HOME");
+		if (!home)
 		{
-			fprintf(stdout, "%s: %i: %s: not found\n", str, n, args[0]);
-			return (2);
+			fprintf(stderr, "cd: %s\n", "HOME not set");
+			return (1);
 		}
-		if (execve(executable, args, env) == -1)
-			perror("something wrong");
-		free(executable);
-	}
-	else if (pid < 0)
-		perror("something error");
-	else
+		if (chdir(home) == -1)
+			perror("cd");
+	} else if (strcmp(args[1], "-") == 0)
 	{
-		wait(&status);
-		return (1);
+		old = getenv("OLDPWD");
+		if (!old)
+		{
+			fprintf(stderr, "cd: OLDPWD not set\n");
+			return (1);
+		}
+		if (chdir(old) == -1)
+			perror("cd");
+	} else
+	{
+		if (chdir(args[1]) == -1)
+		{
+			perror("cd");
+		}
+	}
+	if (getcwd(current, PATH_MAX) == NULL)
+	{
+		perror("getcwd");
+	}
+	if (setenv("PWD", current, 1) == -1)
+	{
+		perror("setenv");
+	}
+	return (1);
+}
+
+/**
+ * exit_fun - Exit shell program
+ * @args: The arguments
+ *
+ * Return: Always returns 0
+ */
+int exit_fun(char **args)
+{
+	(void)args;
+	return (0);
+}
+
+/**
+ * env_fun - Print environment
+ * @args: The arguments
+ *
+ * Return: Always returns 1 to continue the shell loop
+ */
+int env_fun(char **args)
+{
+	int i = 0;
+
+	(void)args;
+	while (environ[i] != NULL)
+	{
+		printf("%s\n", environ[i]);
+		i++;
 	}
 
 	return (1);
+}
+
+/**
+ * execute - Execute a command by launching a process or
+ * running a built-in command
+ * @args: The arguments of the command
+ *
+ * Return: The exit status of the command
+ */
+int execute(char **args)
+{
+	int i;
+	char *builtin_str[] = {
+		"cd",
+		"exit",
+		"env"
+	};
+	int (*builtin_func[]) (char **) = {
+		&cd_fun,
+		&exit_fun,
+		&env_fun
+	};
+
+	if (args[0] == NULL)
+		return (1);
+
+	for (i = 0; i < num_builtins(); i++)
+	{
+		if (strcmp(args[0], builtin_str[i]) == 0)
+			return ((*builtin_func[i])(args));
+	}
+
+	return (lanch(args));
 }
