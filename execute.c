@@ -20,7 +20,7 @@ int num_builtins(void)
 
 
 /**
- * execute - Execute a command by launching a process or
+ * execute_ - Execute a command by launching a process or
  * running a built-in command
  * @args: The arguments of the command
  *
