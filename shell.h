@@ -17,7 +17,7 @@
 #include <limits.h>
 #include <errno.h>
 #include <string.h>
-
+#include <ctype.h>
 #include <stdbool.h>
 
 extern char **environ;
@@ -29,12 +29,13 @@ char **cut_line(char *line);
 int num_builtins(void);
 int exit_fun(char **args);
 int cd_fun(char **args);
-int env_fun(char **args)
+int env_fun(char **args);
 void excution(char *dir, char **args);
+int execute_ (char **args);
 int lanch(char **args);
 char **get_path();
 void loop(void);
 int setenv_fun(char **args);
-int unsetenv(char **args);
+int unsetenv_(char **args);
 
 #endif

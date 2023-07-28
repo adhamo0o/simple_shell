@@ -7,39 +7,21 @@
 */
 char *read_line(void)
 {
-	char *line;
-	int len = 0, Buffer = BUFSIZE;
-	char c;
+	char *line = NULL;
+	size_t bufsize = 0;
 
-	line = malloc(Buffer);
-	if (!line)
+	if (getline(&line, &bufsize, stdin) == -1)
 	{
-		fprintf(stderr, "Allocation error\n");
-		exit(EXIT_FAILURE);
-	}
-	while (1)
-	{
-		c = getchar();
-		if (c == '\n' || c == EOF)
-		{
-			line[len] = '\0';
-			return (line);
-		}
+		if (feof(stdin))
+			exit(EXIT_SUCCESS);
 		else
 		{
-			line[len++] = c;
-		}
-		if (len >= Buffer)
-		{
-			Buffer += BUFSIZE;
-			line = realloc(line, Buffer);
-			if (!line)
-			{
-				fprintf(stderr, "Allocation error\n");
-				exit(EXIT_FAILURE);
-			}
+			perror("readline failure");
+			exit(EXIT_FAILURE);
 		}
 	}
+
+	return (line);
 }
 
 /**

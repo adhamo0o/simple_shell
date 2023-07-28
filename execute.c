@@ -26,7 +26,7 @@ int num_builtins(void)
  *
  * Return: The exit status of the command
  */
-int execute(char **args)
+int execute_(char **args)
 {
 	int i;
 	char *builtin_str[] = {
@@ -41,7 +41,7 @@ int execute(char **args)
 		&exit_fun,
 		&env_fun,
 		&setenv_fun,
-		&unsetenv
+		&unsetenv_
 	};
 
 	if (args[0] == NULL)

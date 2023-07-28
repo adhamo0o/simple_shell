@@ -130,12 +130,12 @@ int setenv_fun(char **args)
 }
 
 /**
- * unsetenv - Unset an environment variable.
+ * unsetenv_ - Unset an environment variable.
  * @args: The arguments passed to the unsetenv
  *
  * Return: Always returns 1
  */
-int unsetenv(char **args)
+int unsetenv_(char **args)
 {
 	if (args[1] == NULL)
 	{

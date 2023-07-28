@@ -10,6 +10,7 @@
  */
 int main(int argc, char **argv)
 {
+	FILE *input_F;
 	char *line = NULL, **args;
 	size_t bufsize = 0;
 	int status = 0;
@@ -21,11 +22,12 @@ int main(int argc, char **argv)
 		loop();
 	else
 	{
-		while (getline(&line, &bufsize, stdin) != -1)
+		input_F = stdin;
+		while (getline(&line, &bufsize, input_F) != -1)
 		{
 			line[strcspn(line, "\n")] = '\0';
 			args = cut_line(line);
-			status = execute(args);
+			status = execute_(args);
 
 			free(args);
 			if (status == 0)
@@ -36,7 +38,7 @@ int main(int argc, char **argv)
 	}
 
 	if (status == 127)
-		return (status);
+		return (127);
 	else
 		return (EXIT_SUCCESS);
 }
@@ -53,7 +55,7 @@ void loop(void)
 		printf("($) ");
 		line = read_line();
 		args = cut_line(line);
-		status = execute(args);
+		status = execute_(args);
 
 		free(line);
 		free(args);
