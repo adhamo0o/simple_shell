@@ -58,14 +58,16 @@ int cd_fun(char **args)
  */
 int exit_fun(char **args)
 {
-	int _exit = 0;
+	int _exit = 0, i;
 	char *c;
 
 	if (args[1] != NULL)
 	{
-		for (c = args[1]; *c != '\0'; c++)
+		c = args[1];
+
+		for (i = 0; c[i] != '\n'; i++)
 		{
-			if (!isdigit(*c))
+			if (!isdigit(c[i]))
 			{
 				fprintf(stderr, "./hsh: 1: exit: Illegal number: %s\n", args[1]);
 				exit(2);
@@ -151,4 +153,3 @@ int unsetenv_(char **args)
 
 	return (1);
 }
-
