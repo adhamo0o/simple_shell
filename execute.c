@@ -10,7 +10,9 @@ int num_builtins(void)
 	char *builtin_str[] = {
 	"cd",
 	"exit",
-	"env"
+	"env",
+	"setenv",
+	"unsetenv"
 	};
 
 	return (sizeof(builtin_str) / sizeof(char *));
@@ -74,8 +76,32 @@ int cd_fun(char **args)
  */
 int exit_fun(char **args)
 {
-	(void)args;
-	return (0);
+	int _exit = 0;
+	char *c;
+
+	if (args[1] != NULL)
+	{
+		for (c = args[1]; *c != '\0'; c++)
+		{
+			if (!isdigit(*c))
+			{
+				fprintf(stderr, "./hsh: 1: exit: Illegal number: %s\n", args[1]);
+				exit(2);
+				return (2);
+			}
+		}
+
+		_exit = atoi(args[1]);
+		if (_exit < 0)
+		{
+			fprintf(stderr, "./hsh: 1: exit: Illegal number: %s\n", args[1]);
+			exit(2);
+			return (2);
+		}
+	}
+
+	exit(_exit);
+	return (_exit);
 }
 
 /**
@@ -99,6 +125,51 @@ int env_fun(char **args)
 }
 
 /**
+ * setenv_fun - Set a new environment variable
+ * @args: The arguments passed to the setenv
+ *
+ * Return: Always returns 1
+ */
+int setenv_fun(char **args)
+{
+	if (args[1] == NULL || args[2] == NULL)
+	{
+		fprintf(stderr, "setenv VARIABLE VALUE\n");
+		return (1);
+	}
+
+	if (setenv(args[1], args[2], 1) == -1)
+	{
+		perror("setenv failure");
+		return (1);
+	}
+
+	return (1);
+}
+
+/**
+ * unsetenv - Unset an environment variable.
+ * @args: The arguments passed to the unsetenv
+ *
+ * Return: Always returns 1
+ */
+int unsetenv(char **args)
+{
+	if (args[1] == NULL)
+	{
+		fprintf(stderr, "unsetenv VARIABLE\n");
+		return (1);
+	}
+
+	if (unsetenv(args[1]) == -1)
+	{
+		perror("unsetenv failure");
+		return (1);
+	}
+
+	return (1);
+}
+/**
  * execute - Execute a command by launching a process or
  * running a built-in command
  * @args: The arguments of the command
@@ -111,12 +182,16 @@ int execute(char **args)
 	char *builtin_str[] = {
 		"cd",
 		"exit",
-		"env"
+		"env",
+		"setenv",
+		"unsetenv"
 	};
 	int (*builtin_func[]) (char **) = {
 		&cd_fun,
 		&exit_fun,
-		&env_fun
+		&env_fun,
+		&setenv_fun,
+		&unsetenv
 	};
 
 	if (args[0] == NULL)

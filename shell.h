@@ -27,13 +27,18 @@ char *read_line(void);
 char **cut_line(char *line);
 int execute_line(char **word, char *str, int n);
 char *get_executable_path(const char *executable_name);
+
 int num_builtins(void);
 int execute(char **args);
-int hsh_exit(char **args);
+
+int exit_fun(char **args);
+
 int cd_fun(char **args);
 void excution(char *dir, char **args);
 int lanch(char **args);
 char **get_path();
 void loop(void);
+int setenv_fun(char **args);
+int unsetenv(char **args);
 
 #endif
