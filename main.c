@@ -26,14 +26,8 @@ int main(int argc, char **argv)
 
 		free(args);
 		free(line);
-		if (status == 0)
-			return (EXIT_SUCCESS);
-	}
 
-	if (status == 127)
-		return (127);
-	else
-		return (EXIT_SUCCESS);
+		return (status);
 }
 
 /**
