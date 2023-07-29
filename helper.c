@@ -58,8 +58,34 @@ int cd_fun(char **args)
  */
 int exit_fun(char **args)
 {
-	(void)args;
-	return (0);
+	int _exit = 0, i;
+	char *c;
+
+	if (args[1] != NULL)
+	{
+		c = args[1];
+
+		for (i = 0; c[i] != '\n'; i++)
+		{
+			if (!isdigit(c[i]))
+			{
+				fprintf(stderr, "./hsh: 1: exit: Illegal number: %s\n", args[1]);
+				exit(2);
+				return (2);
+			}
+		}
+
+		_exit = atoi(args[1]);
+		if (_exit < 0)
+		{
+			fprintf(stderr, "./hsh: 1: exit: Illegal number: %s\n", args[1]);
+			exit(2);
+			return (2);
+		}
+	}
+
+	exit(_exit);
+	return (_exit);
 }
 
 /**
