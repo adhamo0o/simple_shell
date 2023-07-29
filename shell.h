@@ -37,8 +37,8 @@ char **get_path();
 void loop(void);
 int setenv_fun(char **args);
 int unsetenv_(char **args);
-char *strcpy(char *dest, char *src, int n);
-char *strcat(char *dest, char *src, int n);
-char *strch(char *s, char c);
+char *strcpy_(char *dest, char *src, int n);
+char *strcat_(char *dest, char *src, int n);
+char *strch_(char *s, char c);
 
 #endif
