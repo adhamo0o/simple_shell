@@ -26,9 +26,8 @@ int main(int argc, char **argv)
 
 		free(args);
 		free(line);
-
-		return (status);
 	}
+	return (status);
 }
 
 /**
