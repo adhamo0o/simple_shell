@@ -12,8 +12,6 @@ int main(int argc, char **argv)
 {
 	char *line = NULL, **args;
 	int status = 0;
-	size_t bufsize = 0;
-	FILE *f;
 
 	(void)argc;
 	(void)argv;
@@ -22,20 +20,20 @@ int main(int argc, char **argv)
 		loop();
 	else
 	{
-		f = stdin;
-		while(getline(&line, &bufsize, f) != -1)
-		{
-		line[strcspn(line, "\n")] = '\0';
+		line = read_line();
 		args = cut_line(line);
 		status = execute_(args);
 
 		free(args);
-		if (status == 0)
-			break;
-		}
 		free(line);
+		if (status == 0)
+			return (EXIT_SUCCESS);
 	}
-	return (status);
+
+	if (status == 127)
+		return (127);
+	else
+		return (EXIT_SUCCESS);
 }
 
 /**
