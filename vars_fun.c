@@ -1,13 +1,13 @@
 #include "shell.h"
 /**
- * is_chain_fun - test if current char in buffer is a chain
+ * is_chain - test if current char in buffer is a chain
  * @info: parameter 
  * @buf: char buffer
  * @p: address of current position in buf
  *
  * Return: 1
  */
-int is_chain_fun(info_t *info, char *buf, size_t *p)
+int is_chain(info_t *info, char *buf, size_t *p)
 {
 	size_t j = *p;
 
@@ -35,7 +35,7 @@ int is_chain_fun(info_t *info, char *buf, size_t *p)
 }
 
 /**
- * check_chain_fun - checks we continue chaining based on last status
+ * check_chain - checks we continue chaining based on last status
  * @info: parameter
  * @buf: char buffer
  * @p: address of current position in buf
@@ -44,7 +44,7 @@ int is_chain_fun(info_t *info, char *buf, size_t *p)
  *
  * Return: Void
  */
-void check_chain_fun(info_t *info, char *buf, size_t *p, size_t i, size_t len)
+void check_chain(info_t *info, char *buf, size_t *p, size_t i, size_t len)
 {
 	size_t j = *p;
 
@@ -69,12 +69,12 @@ void check_chain_fun(info_t *info, char *buf, size_t *p, size_t i, size_t len)
 }
 
 /**
- * replace_alias_fun - replace aliases in string
+ * replace_alias - replace aliases in string
  * @info: the parameter
  *
  * Return: 1 if replaced, 0 otherwise
  */
-int replace_alias_fun(info_t *info)
+int replace_alias(info_t *info)
 {
 	int i;
 	list_t *node;
@@ -82,14 +82,14 @@ int replace_alias_fun(info_t *info)
 
 	for (i = 0; i < 10; i++)
 	{
-		node = node_starts_with_fun(info->alias, info->argv[0], '=');
+		node = node_starts_with(info->alias, info->argv[0], '=');
 		if (!node)
 			return (0);
 		free(info->argv[0]);
-		p = _strchr_fun(node->str, '=');
+		p = strchr_fun(node->str, '=');
 		if (!p)
 			return (0);
-		p = _strdup_fun(p + 1);
+		p = strdup_fun(p + 1);
 		if (!p)
 			return (0);
 		info->argv[0] = p;
@@ -98,12 +98,12 @@ int replace_alias_fun(info_t *info)
 }
 
 /**
- * replace_vars_fun - replace vars in string
+ * replace_vars - replace vars in string
  * @info: parameter
  *
  * Return: 1 if replaced, 0 otherwise
  */
-int replace_vars_fun(info_t *info)
+int replace_vars(info_t *info)
 {
 	int i = 0;
 	list_t *node;
@@ -113,39 +113,39 @@ int replace_vars_fun(info_t *info)
 		if (info->argv[i][0] != '$' || !info->argv[i][1])
 			continue;
 
-		if (!_strcmp_fun(info->argv[i], "$?"))
+		if (!strcmp_fun(info->argv[i], "$?"))
 		{
-			replace_string_fun(&(info->argv[i]),
-					_strdup_fun(convert_number_fun(info->status, 10, 0)));
+			replace_string(&(info->argv[i]),
+					strdup_fun(convert_number(info->status, 10, 0)));
 			continue;
 		}
-		if (!_strcmp_fun(info->argv[i], "$$"))
+		if (!strcmp_fun(info->argv[i], "$$"))
 		{
-			replace_string_fun(&(info->argv[i]),
-					_strdup_fun(convert_number_fun(getpid(), 10, 0)));
+			replace_string(&(info->argv[i]),
+					strdup_fun(convert_number(getpid(), 10, 0)));
 			continue;
 		}
-		node = node_starts_with_fun(info->env, &info->argv[i][1], '=');
+		node = node_starts_with(info->env, &info->argv[i][1], '=');
 		if (node)
 		{
-			replace_string_fun(&(info->argv[i]),
-					_strdup_fun(_strchr_fun(node->str, '=') + 1));
+			replace_string(&(info->argv[i]),
+					strdup_fun(strchr_fun(node->str, '=') + 1));
 			continue;
 		}
-		replace_string_fun(&info->argv[i], _strdup_fun(""));
+		replace_string(&info->argv[i], strdup_fun(""));
 
 	}
 	return (0);
 }
 
 /**
- * replace_string_fun - replace string
+ * replace_string - replace string
  * @old: old string
  * @new: new string
  *
  * Return: 1 if replaced
  */
-int replace_string_fun(char **old, char *new)
+int replace_string(char **old, char *new)
 {
 	free(*old);
 	*old = new;
