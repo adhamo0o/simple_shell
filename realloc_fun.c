@@ -34,7 +34,7 @@ void ffree_fun(char **pp)
 /**
  *realloc_fun - reallocate block of memory
  *@ptr: ptr
- @old_size: byte size of previous block
+ *@old_size: byte size of previous block
  *@new_size: byte size of new block
  *Return: ptr to da ol'block nameen
  */

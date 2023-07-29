@@ -16,7 +16,7 @@ int hsh_fun(info_t *info, char **av)
 		clear_info(info);
 		if (interactive_fun(info))
 			_puts("$ ");
-		_eputchar(BUF_FLUSH);
+		putchar_fun(BUF_FLUSH);
 		r = get_input(info);
 		if (r != -1)
 		{
@@ -85,7 +85,7 @@ void find_cmd(info_t *info)
 	int i, k;
 
 	info->path = info->argv[0];
-	if (info->linecount_flag== 1)
+	if (info->linecount_flag == 1)
 	{
 		info->line_count++;
 		info->linecount_flag = 0;
@@ -133,7 +133,7 @@ void fork_cmd(info_t *info)
 	}
 	if (child_pid == 0)
 	{
-		if (execve(info->path, info->argv, get_environ_fun(info)) == -1)
+		if (execve(info->path, info->argv, get_environ(info)) == -1)
 		{
 			free_info_fun(info, 1);
 			if (errno == EACCES)
