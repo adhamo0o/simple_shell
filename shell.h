@@ -31,7 +31,7 @@ int exit_fun(char **args);
 int cd_fun(char **args);
 int env_fun(char **args);
 void excution(char *dir, char **args);
-int execute_ (char **args);
+int execute_(char **args);
 int lanch(char **args);
 char **get_path();
 void loop(void);
