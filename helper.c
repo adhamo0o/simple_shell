@@ -105,7 +105,7 @@ int env_fun(char **args)
 		i++;
 	}
 
-	return (1);
+	return (0);
 }
 
 /**
