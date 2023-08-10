@@ -23,7 +23,7 @@ void set_info(info_t *info, char **av)
 	info->fname = av[0];
 	if (info->arg)
 	{
-		info->argv = strtow(info->arg, " \t");
+		info->argv = strtow_fun(info->arg, " \t");
 		if (!info->argv)
 		{
 

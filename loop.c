@@ -16,7 +16,7 @@ int hsh_fun(info_t *info, char **av)
 		clear_info(info);
 		if (interactive_fun(info))
 			_puts("$ ");
-		putchar_fun(BUF_FLUSH);
+		_putchar(BUF_FLUSH);
 		r = get_input(info);
 		if (r != -1)
 		{
@@ -35,7 +35,7 @@ int hsh_fun(info_t *info, char **av)
 		exit(info->status);
 	if (builtin_ret == -2)
 	{
-		if (info->err_num_fun == -1)
+		if (info->err_num == -1)
 			exit(info->status);
 		exit(info->err_num);
 	}
@@ -50,7 +50,7 @@ int hsh_fun(info_t *info, char **av)
  */
 int find_builtin(info_t *info)
 {
-	int i, built_in_ret_fun = -1;
+	int i, built_in_ret = -1;
 	builtin_table builtintbl_fun[] = {
 		{"exit", myexit_fun},
 		{"env", myenv_fun},
@@ -66,7 +66,7 @@ int find_builtin(info_t *info)
 	for (i = 0; builtintbl_fun[i].type; i++)
 		if (strcmp_fun(info->argv[0], builtintbl_fun[i].type) == 0)
 		{
-			info->line_count_fun++;
+			info->line_count++;
 			built_in_ret = builtintbl_fun[i].func(info);
 			break;
 		}
@@ -135,7 +135,7 @@ void fork_cmd(info_t *info)
 	{
 		if (execve(info->path, info->argv, get_environ(info)) == -1)
 		{
-			free_info_fun(info, 1);
+			free_info(info, 1);
 			if (errno == EACCES)
 				exit(126);
 			exit(1);

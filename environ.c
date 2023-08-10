@@ -42,7 +42,7 @@ int mysetenv_fun(info_t *info)
 {
 	if (info->argc != 3)
 	{
-		puts_fun("Incorrect number of arguements\n");
+		_puts("Incorrect number of arguements\n");
 		return (1);
 	}
 	if (setenv_fun(info, info->argv[1], info->argv[2]))
@@ -61,7 +61,7 @@ int myunsetenv_fun(info_t *info)
 
 	if (info->argc == 1)
 	{
-		puts_fun("Too few arguements.\n");
+		_puts("Too few arguements.\n");
 		return (1);
 	}
 	for (i = 1; i <= info->argc; i++)

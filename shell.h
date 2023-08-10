@@ -130,10 +130,10 @@ char *find_path(info_t *, char *, char *);
 int loophsh_fun(char **);
 
 /* errors.c */
-void eputs_fun(char *);
-int eputchar_fun(char);
-int putfd_fun(char c, int fd);
-int putsfd_fun(char *str, int fd);
+void _eputs(char *);
+int _eputchar(char);
+int _putfd(char c, int fd);
+int _putsfd(char *str, int fd);
 
 /* string.c */
 int strlen_fun(char *);
@@ -144,8 +144,8 @@ char *strcat_fun(char *, char *);
 /* string1.c */
 char *strcpy_fun(char *, char *);
 char *strdup_fun(const char *);
-void puts_fun(char *);
-int putchar_fun(char);
+void _puts(char *);
+int _putchar(char);
 
 /* exits.c */
 char *strncpy_fun(char *, char *, int);
@@ -187,7 +187,7 @@ int myhistory_fun(info_t *);
 int myalias_fun(info_t *);
 
 /*getline.c */
-ssize_t input_buf(info_t *info, char **buf, size_t *len):
+ssize_t input_buf(info_t *info, char **buf, size_t *len);
 ssize_t get_input(info_t *);
 int getline_fun(info_t *, char **, size_t *);
 void sigintHandler_fun(int);

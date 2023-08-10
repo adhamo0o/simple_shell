@@ -16,8 +16,8 @@ int myexit_fun(info_t *info)
 		{
 			info->status = 2;
 			print_error(info, "Illegal number: ");
-			puts_fun(info->argv[1]);
-			putchar_fun('\n');
+			_puts(info->argv[1]);
+			_putchar('\n');
 			return (1);
 		}
 		info->err_num = erratoi_fun(info->argv[1]);
@@ -45,8 +45,7 @@ int _mycd(info_t *info)
 	{
 		dir = getenv_fun(info, "HOME=");
 		if (!dir)
-			chdir_ret = /* TODO: what should this be? */
-				chdir((dir = getenv_fun(info, "PWD=")) ? dir : "/");
+			chdir_ret = chdir((dir = getenv_fun(info, "PWD=")) ? dir : "/");
 		else
 			chdir_ret = chdir(dir);
 	}
@@ -59,15 +58,14 @@ int _mycd(info_t *info)
 			return (1);
 		}
 		_puts(getenv_fun(info, "OLDPWD=")), _putchar('\n');
-		chdir_ret = /* TODO: what should this be? */
-			chdir((dir = getenv_fun(info, "OLDPWD=")) ? dir : "/");
+		chdir_ret = chdir((dir = getenv_fun(info, "OLDPWD=")) ? dir : "/");
 	}
 	else
 		chdir_ret = chdir(info->argv[1]);
 	if (chdir_ret == -1)
 	{
 		print_error(info, "can't cd to ");
-		puts_fun(info->argv[1]), putchar_fun('\n');
+		_puts(info->argv[1]), _putchar('\n');
 	}
 	else
 	{

@@ -35,13 +35,13 @@ int erratoi_fun(char *s)
  */
 void print_error(info_t *info, char *estr)
 {
-	puts_fun(info->fname);
-	puts_fun(": ");
+	_puts(info->fname);
+	_puts(": ");
 	print_d(info->line_count, STDERR_FILENO);
-	puts_fun(": ");
-	puts_fun(info->argv[0]);
-	puts_fun(": ");
-	puts_fun(estr);
+	_puts(": ");
+	_puts(info->argv[0]);
+	_puts(": ");
+	_puts(estr);
 }
 
 /**

@@ -1,11 +1,11 @@
 #include "shell.h"
 /**
- *puts_fun - print an input string
+ *_puts - print an input string
  * @str: string to be printed
  *
  * Return: Nothing
  */
-void puts_fun(char *str)
+void _puts(char *str)
 {
 	int i = 0;
 
@@ -13,18 +13,18 @@ void puts_fun(char *str)
 		return;
 	while (str[i] != '\0')
 	{
-		putchar_fun(str[i]);
+		_putchar(str[i]);
 		i++;
 	}
 }
 
 /**
- * putchar_fun - write char c to stderr
+ * _putchar - write char c to stderr
  * @c: character
  *
  * Return: On success 1
  */
-int putchar_fun(char c)
+int _putchar(char c)
 {
 	static int i;
 	static char buf[WRITE_BUF_SIZE];
@@ -40,13 +40,13 @@ int putchar_fun(char c)
 }
 
 /**
- * putfd_fun - write character c
+ * _putfd - write character c
  * @c: character to print
  * @fd: filedescriptor to write to
  *
  * Return: On success 1
  */
-int putfd_fun(char c, int fd)
+int _putfd(char c, int fd)
 {
 	static int i;
 	static char buf[WRITE_BUF_SIZE];
@@ -62,13 +62,13 @@ int putfd_fun(char c, int fd)
 }
 
 /**
- *putsfd_fun - print an input string
+ *_putsfd - print an input string
  * @str: string to be printed
  * @fd: filedescriptor to write to
  *
  * Return: number of chars put
  */
-int putsfd_fun(char *str, int fd)
+int _putsfd(char *str, int fd)
 {
 	int i = 0;
 
