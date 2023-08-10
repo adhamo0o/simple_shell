@@ -12,7 +12,7 @@ int myenv_fun(info_t *info)
 }
 
 /**
- * _getenv - get value of an env
+ * getenv_fun - get value of an env
  * @info: Structure containing args.
  * @name: env var
  *

@@ -13,7 +13,7 @@ int interactive(info_t *info)
 /**
  * is_del - checks if delimeter
  * @c: char
- * @delim: delimeter
+ * @del: delimeter
  * Return: ...
  */
 int is_del(char c, char *del)
@@ -39,12 +39,12 @@ int is_alpha(int c)
 }
 
 /**
- *_atoi - convert string to int
+ *atoi_fun - convert string to int
  *@s: string
  *Return: 0.
  */
 
-int _atoi(char *s)
+int atoi_fun(char *s)
 {
 	int i, sign = 1, flag = 0, output;
 	unsigned int result = 0;
