@@ -1,12 +1,12 @@
 #include "shell.h"
 /**
- * hsh_fun - main shell loop
+ * hshell - main shell loop
  * @info: parameter
  * @av: arg vector
  *
  * Return: 0 on success
  */
-int hsh_fun(info_t *info, char **av)
+int hshell(info_t *info, char **av)
 {
 	ssize_t r = 0;
 	int builtin_ret = 0;

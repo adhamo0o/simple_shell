@@ -45,9 +45,9 @@ extern char **environ;
  */
 typedef struct liststr
 {
-	int num;
-	char *str;
-	struct liststr *next;
+	int num;/**< Description of num field */
+	char *str;/**< Description of str field */
+	struct liststr *next;/**< Description of next field */
 } list_t;
 
 /**
@@ -110,13 +110,7 @@ typedef struct builtin
 	int (*func)(info_t *);
 } builtin_table;
 
-/**
- * every file prototype collected under comment
- * with it's file name
-*/
-
-/* sh_loop.c */
-int hsh_fun(info_t *, char **);
+int hshell(info_t *, char **);
 int find_builtin(info_t *);
 void find_cmd(info_t *);
 void fork_cmd(info_t *);
