@@ -1,11 +1,11 @@
 #include "shell.h"
 /**
- * interactive - return true if shell is interactive mode
+ * interactive_fun - return true if shell is interactive mode
  * @info: struct address
  *
  * Return: 1 on interactive mode, 0 otherwise
  */
-int interactive(info_t *info)
+int interactive_fun(info_t *info)
 {
 	return (isatty(STDIN_FILENO) && info->readfd <= 2);
 }

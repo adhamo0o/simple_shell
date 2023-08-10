@@ -1,11 +1,11 @@
 #include "shell.h"
 /**
- *_puts - print an input string
+ *_eputs - print an input string
  * @str: string to be printed
  *
  * Return: Nothing
  */
-void _puts(char *str)
+void _eputs(char *str)
 {
 	int i = 0;
 
@@ -19,12 +19,12 @@ void _puts(char *str)
 }
 
 /**
- * _putchar - write char c to stderr
+ * _eputchar - write char c to stderr
  * @c: character
  *
  * Return: On success 1
  */
-int _putchar(char c)
+int _eputchar(char c)
 {
 	static int i;
 	static char buf[WRITE_BUF_SIZE];

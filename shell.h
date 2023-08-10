@@ -116,7 +116,7 @@ typedef struct builtin
 */
 
 /* sh_loop.c */
-int hshell_fun(info_t *, char **);
+int hsh_fun(info_t *, char **);
 int find_builtin(info_t *);
 void find_cmd(info_t *);
 void fork_cmd(info_t *);
@@ -166,8 +166,8 @@ int bfree_fun(void **);
 
 /* atoi.c */
 int interactive_fun(info_t *);
-int is_delim(char, char *);
-int isalpha_fun(int);
+int is_del(char, char *);
+int is_alpha(int);
 int atoi_fun(char *);
 
 /* errors1.c */
@@ -185,6 +185,9 @@ int myhelp_fun(info_t *);
 /* builtin1.c */
 int myhistory_fun(info_t *);
 int myalias_fun(info_t *);
+int unset_alias(info_t *info, char *str);
+int set_alias(info_t *info, char *str);
+int print_alias(list_t *node);
 
 /*getline.c */
 ssize_t input_buf(info_t *info, char **buf, size_t *len);

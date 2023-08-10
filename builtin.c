@@ -28,12 +28,12 @@ int myexit_fun(info_t *info)
 }
 
 /**
- * _mycd - change current directory
+ * mycd_fun - change current directory
  * @info: Structure containing args.
  *  Return: Always 0
  */
 
-int _mycd(info_t *info)
+int mycd_fun(info_t *info)
 {
 	char *s, *dir, buffer[1024];
 	int chdir_ret;
@@ -76,11 +76,11 @@ int _mycd(info_t *info)
 }
 
 /**
- * _myhelp - help fun.
+ * myhelp_fun - help fun.
  * @info: Structure containing args.
  *  Return: Always 0
  */
-int _myhelp(info_t *info)
+int myhelp_fun(info_t *info)
 {
 	char **arg_array;
 
